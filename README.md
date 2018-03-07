@@ -4,20 +4,20 @@ Sometimes you're composing a chat message or closing a PR, and the need to inser
 
 ## Installation
 
+You can either install via the CLI, or the GUI.
+
 #### CLI install
 
 1. Install the service:
 ```bash
-$ cp -R 'GIPHY Anywhere....workflow' ~/Library/Services/
+cp -R 'GIPHY Anywhere....workflow' ~/Library/Services/
 ```
 
 2. Set the keyboard shortcut (Command-Control-G) for invoking the service:
 ```bash
-$ defaults write pbs NSServicesStatus '{
-  "(null) - GIPHY Anywhere... - runWorkflowAsService" = {
-    "key_equivalent" = "@^g";
-  };
-}'
+defaults write pbs NSServicesStatus \
+  -dict-add '"(null) - GIPHY Anywhere... - runWorkflowAsService"' \
+  '"key_equivalent" = "@^g";'
 ```
 
 #### GUI install
@@ -28,7 +28,7 @@ $ defaults write pbs NSServicesStatus '{
 
 ## Usage
 
-Whenever the urge to gif strikes, just hit Command-Control-G, select your destiny, and press OK.
+Whenever the urge to gif strikes, just hit Command-Control-G, find a gif to fit your mood, and press OK. The URL of the last-viewed gif will be inserted into the currently focused text area.
 
 ## Known issues
 
