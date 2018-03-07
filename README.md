@@ -34,6 +34,10 @@ Whenever the urge to gif strikes, just hit Command-Control-G, find a gif to fit 
 
 The popover window doesn't have focus when it appears, so the first click on the window focuses the window instead of taking an action.
 
+The service cannot be invoked in HipChat.
+
+The service cannot be invoked in Safari.
+
 ## Acknowledgements
 
 This project was inspired by https://github.com/cknadler/vim-anywhere, and by the rich gif culture at my place of work.
