@@ -1,6 +1,10 @@
 ObjC.import('Cocoa')
 ObjC.import('WebKit')
 
+// add ourselves to the Login Items
+
+Application('System Events').LoginItem({path: $.NSBundle.mainBundle.bundlePath.js, hidden: false}).make()
+
 // create web view
 
 var webViewRect = $.NSMakeRect(0, 0, 360, 640)
@@ -103,6 +107,7 @@ ObjC.registerSubclass({
         'quit:': {
             types: ['void', ['id']],
             implementation: function(sender) {
+                Application('System Events').loginItems.whose({path: $.NSBundle.mainBundle.bundlePath.js}).first.delete()
                 $.NSNotificationCenter.defaultCenter.removeObserver(statusItemController)
                 $.NSApp.terminate($())
             }
