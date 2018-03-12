@@ -17,7 +17,7 @@ make install
 
 The status bar item will be built into the `build` directory and then opened, displaying as an icon in the menu bar.
 
-If you would like *GIPHY Anywhere* to automatically open whenever you login you can add it to your user's Login Items using the Users & Groups preferences in the System Preferences app.
+*GIPHY Anywhere* automatically adds itself to your Login Items upon launch, and removes itself from your Login Items if you use the Quit menu item.
 
 ## Usage
 
