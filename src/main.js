@@ -20,6 +20,21 @@ var url = $.NSURL.URLWithString('https://giphy.com/')
 var req = $.NSURLRequest.requestWithURL(url)
 webView.loadRequest(req)
 
+var hideTrendingChannelsScript = `
+  var h2Tags = document.getElementsByTagName('h2');
+  var searchText = 'Trending Channels';
+  var foundElement;
+  for (var i = 0; i < h2Tags.length; i++) {
+    if (h2Tags[i].textContent == searchText) {
+      foundElement = h2Tags[i];
+      break;
+    }
+  }
+  if (foundElement) {
+    foundElement.parentElement.parentElement.hidden = true;
+  }
+`
+
 // create menu items
 
 var webViewItem = $.NSMenuItem.alloc.init
@@ -75,6 +90,12 @@ ObjC.registerSubclass({
         statusItem.button.performClick(this)
       }
     },
+    'webView:didFinishNavigation:': {
+      types: ['void', ['id', 'id']],
+      implementation: function(webView, navigation) {
+        webView.evaluateJavaScriptCompletionHandler(hideTrendingChannelsScript, function (result, error) {})
+      }
+    },
     'copyURL:': {
       types: ['void', ['id']],
       implementation: function(sender) {
@@ -120,6 +141,8 @@ ObjC.registerSubclass({
 var statusItemController = $.StatusItemController.alloc.init
 
 $.NSNotificationCenter.defaultCenter.addObserverSelectorNameObject(statusItemController, 'becomeActive:', $.NSApplicationDidBecomeActiveNotification, $.NSApp)
+
+webView.navigationDelegate = statusItemController
 
 // create status item to status bar
 
