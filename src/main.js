@@ -45,74 +45,74 @@ statusMenu.addItem(quitItem)
 // register controller class
 
 function gifURL(url) {
-    var gif = undefined
-    var matches = RegExp('^https://giphy.com/gifs/.+-([^-\n]+)$').exec(url)
-    if (matches && matches.length == 2) {
-	    var identifier = matches[1]
-		gif = 'https://media.giphy.com/media/' + identifier + '/giphy.gif'
-    }
-	return gif
+  var gif = undefined
+  var matches = RegExp('^https://giphy.com/gifs/.+-([^-\n]+)$').exec(url)
+  if (matches && matches.length == 2) {
+    var identifier = matches[1]
+    gif = 'https://media.giphy.com/media/' + identifier + '/giphy.gif'
+  }
+  return gif
 }
 
 ObjC.registerSubclass({
-    name: 'StatusItemController',
-    methods: {
-        'popUpMenu:': {
-            types: ['void', ['id']],
-            implementation: function(sender) {
-                if ($.NSApplication.sharedApplication.active) {
-                    statusItem.highlightMode = true
-                    statusItem.popUpStatusItemMenu(statusMenu)
-                    statusItem.highlightMode = false
-                } else {
-                    $.NSApplication.sharedApplication.activateIgnoringOtherApps(true)
-                }
-            }
-        },
-        'becomeActive:': {
-            types: ['void', ['id']],
-            implementation: function(sender) {
-                statusItem.button.performClick(this)
-            }
-        },
-        'copyURL:': {
-            types: ['void', ['id']],
-            implementation: function(sender) {
-				var url = gifURL(webView.URL.description.js)
-				if (url) {
-                	$.NSPasteboard.generalPasteboard.clearContents
-                	$.NSPasteboard.generalPasteboard.writeObjects($([url]))
-				}
-				else {
-	                statusItem.button.performClick(this)
-					$.NSBeep()
-				}
-            }
-        },
-        'copyMarkdown:': {
-            types: ['void', ['id']],
-            implementation: function(sender) {
-				var url = gifURL(webView.URL.description.js)
-				if (url) {
-					var markdown = '![](' + url + ')'
-                	$.NSPasteboard.generalPasteboard.clearContents
-                	$.NSPasteboard.generalPasteboard.writeObjects($([markdown]))
-				}
-				else {
-                	statusItem.button.performClick(this)
-					$.NSBeep()
-				}
-            }
-        },
-        'quit:': {
-            types: ['void', ['id']],
-            implementation: function(sender) {
-                Application('System Events').loginItems.whose({path: $.NSBundle.mainBundle.bundlePath.js}).first.delete()
-                $.NSNotificationCenter.defaultCenter.removeObserver(statusItemController)
-                $.NSApp.terminate($())
-            }
-        },
-    }
+  name: 'StatusItemController',
+  methods: {
+    'popUpMenu:': {
+      types: ['void', ['id']],
+      implementation: function(sender) {
+        if ($.NSApplication.sharedApplication.active) {
+          statusItem.highlightMode = true
+          statusItem.popUpStatusItemMenu(statusMenu)
+          statusItem.highlightMode = false
+        } else {
+          $.NSApplication.sharedApplication.activateIgnoringOtherApps(true)
+        }
+      }
+    },
+    'becomeActive:': {
+      types: ['void', ['id']],
+      implementation: function(sender) {
+        statusItem.button.performClick(this)
+      }
+    },
+    'copyURL:': {
+      types: ['void', ['id']],
+      implementation: function(sender) {
+        var url = gifURL(webView.URL.description.js)
+        if (url) {
+          $.NSPasteboard.generalPasteboard.clearContents
+          $.NSPasteboard.generalPasteboard.writeObjects($([url]))
+        }
+        else {
+          statusItem.button.performClick(this)
+          $.NSBeep()
+        }
+      }
+    },
+    'copyMarkdown:': {
+      types: ['void', ['id']],
+      implementation: function(sender) {
+        var url = gifURL(webView.URL.description.js)
+        if (url) {
+          var markdown = '![](' + url + ')'
+          $.NSPasteboard.generalPasteboard.clearContents
+          $.NSPasteboard.generalPasteboard.writeObjects($([markdown]))
+        }
+        else {
+          statusItem.button.performClick(this)
+          $.NSBeep()
+        }
+      }
+    },
+    'quit:': {
+      types: ['void', ['id']],
+      implementation: function(sender) {
+        Application('System Events').loginItems.whose({path: $.NSBundle.mainBundle.bundlePath.js}).first.delete()
+        $.NSNotificationCenter.defaultCenter.removeObserver(statusItemController)
+        $.NSApp.terminate($())
+      }
+    },
+  }
 })
 
 // create controller
@@ -128,10 +128,10 @@ var statusItem = $.NSStatusBar.systemStatusBar.statusItemWithLength($.NSVariable
 var giphyImage = $.NSImage.alloc.initWithContentsOfURL($.NSURL.URLWithString('https://giphy.com/favicon.ico'))
 
 if (giphyImage.isNil()) {
-	statusItem.button.title = "GIPHY Anywhere"
+  statusItem.button.title = "GIPHY Anywhere"
 }
 else {
-	statusItem.button.image = giphyImage
+  statusItem.button.image = giphyImage
 }
 
 // set controller as target of status item and menu items
