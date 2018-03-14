@@ -29,7 +29,7 @@ var copyURLItem = $.NSMenuItem.alloc.init
 copyURLItem.title = 'Copy GIF URL'
 
 var copyMarkdownItem = $.NSMenuItem.alloc.init
-copyMarkdownItem.title = 'Copy GIF URL (Github Markdown)'
+copyMarkdownItem.title = 'Copy GIF URL (GitHub Markdown)'
 
 var quitItem = $.NSMenuItem.alloc.init
 quitItem.title = 'Quit'
