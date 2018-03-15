@@ -5,7 +5,7 @@ Sometimes you're composing a chat message or commenting on a pull request, and t
 *GIPHY Anywhere* is a status bar item which allows you to quickly browse GIPHY for gifs.
 
 <p align=center>
-<img src="https://raw.githubusercontent.com/bacongravy/giphy-anywhere/screenshot/screenshot.gif">
+<img src="https://raw.githubusercontent.com/bacongravy/giphy-anywhere/images/screenshot.gif">
 </p>
 
 ## Installation
