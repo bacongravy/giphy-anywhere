@@ -59,14 +59,20 @@ statusMenu.addItem(quitItem)
 
 // register controller class
 
-function gifURL(url) {
-  var gif = undefined
+function gifIdentifier(url) {
   var matches = RegExp('^https://giphy.com/gifs/.+-([^-\n]+)$').exec(url)
   if (matches && matches.length == 2) {
-    var identifier = matches[1]
-    gif = 'https://media.giphy.com/media/' + identifier + '/giphy.gif'
+    return matches[1]
   }
-  return gif
+  return undefined
+}
+
+function gifURL(url) {
+  var identifier = gifIdentifier(url)
+  if (identifier) {
+    return 'https://media.giphy.com/media/' + identifier + '/giphy.gif'
+  }
+  return undefined
 }
 
 ObjC.registerSubclass({
@@ -84,6 +90,15 @@ ObjC.registerSubclass({
         }
       }
     },
+    'validateMenuItem:': {
+      types: ['BOOL', ['id']],
+      implementation: function(sender) {
+        if (sender.action == 'copyURL:' || sender.action == 'copyMarkdown:') {
+          return gifIdentifier(webView.URL.description.js) != undefined
+        }
+        return true
+      }
+    },
     'becomeActive:': {
       types: ['void', ['id']],
       implementation: function(sender) {
@@ -96,6 +111,16 @@ ObjC.registerSubclass({
         webView.evaluateJavaScriptCompletionHandler(hideTrendingChannelsScript, function (result, error) {})
       }
     },
+    'observeValueForKeyPath:ofObject:change:context:': {
+      types: ['void', ['id', 'id', 'id', 'void *']],
+      implementation: function(keyPath, object, change, context) {
+        if (keyPath.isEqualToString('URL')) {
+          var enabled = gifIdentifier(webView.URL.description.js) != undefined
+          copyURLItem.enabled = enabled
+          copyMarkdownItem.enabled = enabled
+        }
+      }
+    },
     'copyURL:': {
       types: ['void', ['id']],
       implementation: function(sender) {
@@ -105,7 +130,6 @@ ObjC.registerSubclass({
           $.NSPasteboard.generalPasteboard.writeObjects($([url]))
         }
         else {
-          statusItem.button.performClick(this)
           $.NSBeep()
         }
       }
@@ -120,7 +144,6 @@ ObjC.registerSubclass({
           $.NSPasteboard.generalPasteboard.writeObjects($([markdown]))
         }
         else {
-          statusItem.button.performClick(this)
           $.NSBeep()
         }
       }
@@ -143,6 +166,8 @@ var statusItemController = $.StatusItemController.alloc.init
 $.NSNotificationCenter.defaultCenter.addObserverSelectorNameObject(statusItemController, 'becomeActive:', $.NSApplicationDidBecomeActiveNotification, $.NSApp)
 
 webView.navigationDelegate = statusItemController
+
+webView.addObserverForKeyPathOptionsContext(statusItemController, 'URL', $.NSKeyValueObservingOptionNew, undefined)
 
 // create status item to status bar
 
