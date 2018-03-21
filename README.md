@@ -8,10 +8,20 @@ Sometimes you're composing a chat message or commenting on a pull request, and t
 <img src="https://raw.githubusercontent.com/bacongravy/giphy-anywhere/images/screenshot.gif">
 </p>
 
+## Dependencies
+
+*GIPHY Anywhere* requires macOS.
+
+While there are no other runtime dependencies, installation requires the `git` and `make` tools, which are included with the [Xcode](https://developer.apple.com/xcode/) developer tools.
+
+A simple way to get `git` and `make` installed via the command line is to install [Homebrew](https://brew.sh), which has the side-effect of installing the Xcode command-line tools package as a dependency.
+
 ## Installation
 
-To build and open the status bar item, run the following command at the root of the workspace:
+To clone this repository and then build and open the status bar item, run the following commands in Terminal:
 ```bash
+git clone https://github.com/bacongravy/giphy-anywhere
+cd giphy-anywhere
 make install
 ```
 
