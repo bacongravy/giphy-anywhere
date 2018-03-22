@@ -9,6 +9,7 @@ install: $(BUILD_PRODUCT)
 
 $(BUILD_PRODUCT): src/main.js
 	mkdir -p build
+	rm -rf "$@"
 	osacompile -s -o "$@" -l JavaScript -s "$<"
 	/usr/libexec/PlistBuddy "$@/Contents/Info.plist" -c "Add :LSUIElement bool YES"
 
