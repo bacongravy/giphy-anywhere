@@ -60,9 +60,9 @@ statusMenu.addItem(quitItem)
 // register controller class
 
 function gifIdentifier(url) {
-  var matches = RegExp('^https://giphy.com/gifs/.+-([^-\n]+)$').exec(url)
-  if (matches && matches.length == 2) {
-    return matches[1]
+  var matches = RegExp('^https://giphy.com/gifs/(.*-)?([^-\n]+)$').exec(url)
+  if (matches && matches.length == 3) {
+    return matches[2]
   }
   return undefined
 }
