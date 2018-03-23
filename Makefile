@@ -1,4 +1,4 @@
-.PHONY: all install clean
+.PHONY: all quit install uninstall clean
 
 BUILD_PRODUCT := build/GIPHY\ Anywhere.app
 
@@ -15,8 +15,16 @@ $(BUILD_PRODUCT): src/main.js build/Info.plist build
 
 all: $(BUILD_PRODUCT)
 
-install: $(BUILD_PRODUCT)
-	open "$<"
+quit:
+	osascript -e 'tell app "GIPHY Anywhere" to quit'
+
+install: $(BUILD_PRODUCT) quit
+	rm -rf "/Applications/GIPHY Anywhere.app"
+	cp -R "$<" /Applications/
+	open "/Applications/GIPHY Anywhere.app"
+
+uninstall: quit
+	rm -rf "/Applications/GIPHY Anywhere.app"
 
 clean:
 	rm -rf build
