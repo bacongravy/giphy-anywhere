@@ -8,10 +8,13 @@ build:
 build/%: rsrc/%.erb build
 	erb -T - "$<" > "$@"
 
-$(BUILD_PRODUCT): src/main.js build/Info.plist build
+$(BUILD_PRODUCT): src/main.swift build/Info.plist build
 	rm -rf "$@"
-	osacompile -s -o "$@" -l JavaScript -s "$<"
+	mkdir "$@"
+	mkdir "$@/Contents"
 	cp build/Info.plist "$@/Contents/Info.plist"
+	mkdir "$@/Contents/MacOS"
+	cp src/main.swift "$@/Contents/MacOS/GIPHY Anywhere"
 
 all: $(BUILD_PRODUCT)
 
