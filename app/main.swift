@@ -2,6 +2,7 @@
 
 import Cocoa
 import WebKit
+import ServiceManagement
 
 let sharedApplication = NSApplication.shared
 
@@ -162,6 +163,7 @@ class StatusItemController: NSObject, WKNavigationDelegate {
     @objc func quit(_ sender: AnyObject) {
         // Remove the app from the LoginItems
         // Application('System Events').loginItems.whose({path: $.NSBundle.mainBundle.bundlePath.js}).first.delete()
+        SMLoginItemSetEnabled("net.bacongravy.giphy-anywhere-helper" as CFString, false)
         NSApp.terminate(sender)
     }
 }
@@ -188,5 +190,7 @@ quitItem.action = #selector(StatusItemController.quit(_:))
 
 // Add the app to the LoginItems
 // Application('System Events').LoginItem({path: $.NSBundle.mainBundle.bundlePath.js, hidden: false}).make()
+
+SMLoginItemSetEnabled("net.bacongravy.giphy-anywhere-helper" as CFString, true)
 
 NSApp.run()
