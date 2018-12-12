@@ -37,13 +37,4 @@ Additional references:
 
 ## Why?
 
-I use the GIPHY keyboard on iOS every day, and I miss it whenever I'm using macOS. Seeing *vim-anywhere* on *Hacker News* gave me the motivation to solve my problem in a similar way. After prototyping a solution using an Automator workflow service and gathering feedback, I rewrote the project as a JavaScript for Automation applet to provide a more reliable and consistent user experience across applications.
-
-## Development
-
-To build and install the status bar item, run the following command in Terminal at the root of the project workspace:
-```bash
-make install
-```
-
-The status bar item will be built into the `build` directory, copied to `/Applications`, and then opened.
+I use the GIPHY keyboard on iOS every day, and I miss it whenever I'm using macOS. Seeing *vim-anywhere* on *Hacker News* gave me the motivation to solve my problem in a similar way. After prototyping a solution using an Automator workflow service and gathering feedback, I rewrote the project as a JavaScript for Automation applet to provide a more reliable and consistent user experience across applications. When JavaScript for Automation stopped working in Mojave, I rewrote the project in Swift 4.
