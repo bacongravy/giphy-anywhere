@@ -10,11 +10,7 @@ Sometimes you're composing a chat message or commenting on a pull request, and t
 
 ## Installation
 
-*GIPHY Anywhere* requires macOS, and is installed using [Homebrew](https://brew.sh):
-
-```bash
-brew cask install bacongravy/jxa/giphy-anywhere
-```
+*GIPHY Anywhere* requires macOS.
 
 The GIPHY icon will appear in your menu bar upon completion of installation.
 
@@ -30,11 +26,6 @@ Huge thanks to GIPHY for providing a great service. This project is not affiliat
 
 This project was inspired by https://github.com/cknadler/vim-anywhere, and by the rich gif culture at my place of work.
 
-Additional references:
-
-* https://gist.github.com/uchcode/be35f7b99ce4c6b74ad87aaf22e83835
-* https://github.com/blackgate/cljs-jxa-starter
-
 ## Why?
 
-I use the GIPHY keyboard on iOS every day, and I miss it whenever I'm using macOS. Seeing *vim-anywhere* on *Hacker News* gave me the motivation to solve my problem in a similar way. After prototyping a solution using an Automator workflow service and gathering feedback, I rewrote the project as a JavaScript for Automation applet to provide a more reliable and consistent user experience across applications. When JavaScript for Automation stopped working in Mojave, I rewrote the project in Swift 4.
+I use the GIPHY keyboard on iOS every day, and I miss it whenever I'm using macOS. Seeing *vim-anywhere* on *Hacker News* gave me the motivation to solve my problem in a similar way. After prototyping a solution using an Automator workflow service and gathering feedback, I rewrote the project as a JavaScript for Automation (JXA) applet to provide a more reliable and consistent user experience across applications. When JXA stopped working in Mojave, I rewrote the project in Swift 4.
