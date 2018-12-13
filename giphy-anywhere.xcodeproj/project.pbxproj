@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5B0E966E21BE1EB6000470BF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0E965A21BE1E20000470BF /* main.swift */; };
 		5B0E967321BE224C000470BF /* GIPHY Anywhere Helper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B0E966021BE1E68000470BF /* GIPHY Anywhere Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5B12D6B621C215520026BD34 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B521C215520026BD34 /* MainController.swift */; };
+		5B12D6B821C216330026BD34 /* ServiceManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B721C216330026BD34 /* ServiceManagement.swift */; };
+		5B12D6BA21C216750026BD34 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B921C216750026BD34 /* String.swift */; };
 		5BF36F1021B24B2200E7F982 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF36F0F21B24B2200E7F982 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +33,9 @@
 		5B0E966021BE1E68000470BF /* GIPHY Anywhere Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIPHY Anywhere Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B0E966921BE1E6B000470BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B0E966F21BE20F2000470BF /* GIPHY Anywhere Helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GIPHY Anywhere Helper.entitlements"; sourceTree = "<group>"; };
+		5B12D6B521C215520026BD34 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		5B12D6B721C216330026BD34 /* ServiceManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagement.swift; sourceTree = "<group>"; };
+		5B12D6B921C216750026BD34 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		5BD007FF21BE2392007A7B2E /* GIPHY Anywhere.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GIPHY Anywhere.entitlements"; sourceTree = "<group>"; };
 		5BF36EFE21B24A8200E7F982 /* GIPHY Anywhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIPHY Anywhere.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF36F0821B24A8400E7F982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +63,9 @@
 		5B0E965821BE1DF0000470BF /* app */ = {
 			isa = PBXGroup;
 			children = (
+				5B12D6B521C215520026BD34 /* MainController.swift */,
+				5B12D6B721C216330026BD34 /* ServiceManagement.swift */,
+				5B12D6B921C216750026BD34 /* String.swift */,
 				5BF36F0F21B24B2200E7F982 /* main.swift */,
 				5BF36F0821B24A8400E7F982 /* Info.plist */,
 				5BD007FF21BE2392007A7B2E /* GIPHY Anywhere.entitlements */,
@@ -206,7 +215,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B12D6B621C215520026BD34 /* MainController.swift in Sources */,
 				5BF36F1021B24B2200E7F982 /* main.swift in Sources */,
+				5B12D6BA21C216750026BD34 /* String.swift in Sources */,
+				5B12D6B821C216330026BD34 /* ServiceManagement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
