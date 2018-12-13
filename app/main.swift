@@ -13,10 +13,8 @@ func gifIdentifier(url: URL?) -> String? {
 }
 
 func gifURL(url: URL?) -> String? {
-    if let identifier = gifIdentifier(url: url) {
-        return "https://media.giphy.com/media/" + identifier + "/giphy.gif"
-    }
-    return nil
+    guard let identifier = gifIdentifier(url: url) else { return nil }
+    return "https://media.giphy.com/media/" + identifier + "/giphy.gif"
 }
 
 // from https://stackoverflow.com/a/40040472/5829298
@@ -120,12 +118,14 @@ class MainController: NSObject, NSApplicationDelegate {
     }
 
     @objc func validateMenuItem(_ sender: AnyObject?) -> Bool {
-        if let menuItem = sender as? NSMenuItem {
-            if (menuItem.action == #selector(MainController.copyURL(_:)) || menuItem.action == #selector(MainController.copyMarkdown(_:))) {
-                return gifIdentifier(url: webView.url) != nil
-            }
+        let menuItem = sender as? NSMenuItem
+        switch menuItem?.action {
+        case #selector(MainController.copyURL(_:)),
+             #selector(MainController.copyMarkdown(_:)):
+            return gifIdentifier(url: webView.url) != nil
+        default:
+            return true
         }
-        return true
     }
     
     func hideUseOurAppButton() {
@@ -150,18 +150,18 @@ class MainController: NSObject, NSApplicationDelegate {
                             of object: Any?,
                             change: [NSKeyValueChangeKey : Any]?,
                             context: UnsafeMutableRawPointer?) {
-        if let keyPath = keyPath {
-            if (keyPath == "URL") {
-                if (webView.url?.absoluteString == "https://giphy.com/") {
-                    webView.load(URLRequest.init(url: url!))
-                }
-                else {
-                    let enabled = gifIdentifier(url: webView.url) != nil
-                    copyURLItem.isEnabled = enabled
-                    copyMarkdownItem.isEnabled = enabled
-                }
-                hideUseOurAppButton()
+        switch keyPath {
+        case "URL":
+            switch webView.url?.absoluteString {
+            case "https://giphy.com/":
+                webView.load(URLRequest.init(url: url!))
+            default:
+                let enabled = gifIdentifier(url: webView.url) != nil
+                copyURLItem.isEnabled = enabled
+                copyMarkdownItem.isEnabled = enabled
             }
+            hideUseOurAppButton()
+        default: break
         }
     }
 
