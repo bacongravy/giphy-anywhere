@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5B12D6BE21C3FD320026BD34"
+               BuildableName = "GIPHY Anywhere UI Tests.xctest"
+               BlueprintName = "GIPHY Anywhere UI Tests"
+               ReferencedContainer = "container:giphy-anywhere.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

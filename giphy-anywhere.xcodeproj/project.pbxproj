@@ -12,8 +12,19 @@
 		5B12D6B621C215520026BD34 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B521C215520026BD34 /* MainController.swift */; };
 		5B12D6B821C216330026BD34 /* ServiceManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B721C216330026BD34 /* ServiceManagement.swift */; };
 		5B12D6BA21C216750026BD34 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B921C216750026BD34 /* String.swift */; };
+		5B12D6C221C3FD330026BD34 /* app_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6C121C3FD330026BD34 /* app_tests.swift */; };
 		5BF36F1021B24B2200E7F982 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF36F0F21B24B2200E7F982 /* main.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5B12D6C421C3FD330026BD34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BF36EF621B24A8200E7F982 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BF36EFD21B24A8200E7F982;
+			remoteInfo = "GIPHY Anywhere";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5B0E967221BE223E000470BF /* CopyFiles */ = {
@@ -36,6 +47,9 @@
 		5B12D6B521C215520026BD34 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		5B12D6B721C216330026BD34 /* ServiceManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagement.swift; sourceTree = "<group>"; };
 		5B12D6B921C216750026BD34 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		5B12D6BF21C3FD320026BD34 /* GIPHY Anywhere UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GIPHY Anywhere UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B12D6C121C3FD330026BD34 /* app_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = app_tests.swift; sourceTree = "<group>"; };
+		5B12D6C321C3FD330026BD34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BD007FF21BE2392007A7B2E /* GIPHY Anywhere.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GIPHY Anywhere.entitlements"; sourceTree = "<group>"; };
 		5BF36EFE21B24A8200E7F982 /* GIPHY Anywhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIPHY Anywhere.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF36F0821B24A8400E7F982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +58,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		5B0E965D21BE1E68000470BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B12D6BC21C3FD320026BD34 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -83,12 +104,22 @@
 			path = helper;
 			sourceTree = "<group>";
 		};
+		5B12D6C021C3FD330026BD34 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				5B12D6C121C3FD330026BD34 /* app_tests.swift */,
+				5B12D6C321C3FD330026BD34 /* Info.plist */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
 		5BF36EF521B24A8200E7F982 = {
 			isa = PBXGroup;
 			children = (
 				5B0E965821BE1DF0000470BF /* app */,
 				5B0E965921BE1DF4000470BF /* helper */,
 				5BF36EFF21B24A8200E7F982 /* build */,
+				5B12D6C021C3FD330026BD34 /* test */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +128,7 @@
 			children = (
 				5BF36EFE21B24A8200E7F982 /* GIPHY Anywhere.app */,
 				5B0E966021BE1E68000470BF /* GIPHY Anywhere Helper.app */,
+				5B12D6BF21C3FD320026BD34 /* GIPHY Anywhere UI Tests.xctest */,
 			);
 			name = build;
 			sourceTree = "<group>";
@@ -120,6 +152,24 @@
 			productName = "GIPHY Anywhere Helper";
 			productReference = 5B0E966021BE1E68000470BF /* GIPHY Anywhere Helper.app */;
 			productType = "com.apple.product-type.application";
+		};
+		5B12D6BE21C3FD320026BD34 /* GIPHY Anywhere UI Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B12D6C821C3FD330026BD34 /* Build configuration list for PBXNativeTarget "GIPHY Anywhere UI Tests" */;
+			buildPhases = (
+				5B12D6BB21C3FD320026BD34 /* Sources */,
+				5B12D6BC21C3FD320026BD34 /* Frameworks */,
+				5B12D6BD21C3FD320026BD34 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B12D6C521C3FD330026BD34 /* PBXTargetDependency */,
+			);
+			name = "GIPHY Anywhere UI Tests";
+			productName = "GIPHY Anywhere UI Tests";
+			productReference = 5B12D6BF21C3FD320026BD34 /* GIPHY Anywhere UI Tests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		5BF36EFD21B24A8200E7F982 /* GIPHY Anywhere */ = {
 			isa = PBXNativeTarget;
@@ -156,6 +206,10 @@
 							};
 						};
 					};
+					5B12D6BE21C3FD320026BD34 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 5BF36EFD21B24A8200E7F982;
+					};
 					5BF36EFD21B24A8200E7F982 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
@@ -181,12 +235,20 @@
 			targets = (
 				5BF36EFD21B24A8200E7F982 /* GIPHY Anywhere */,
 				5B0E965F21BE1E68000470BF /* GIPHY Anywhere Helper */,
+				5B12D6BE21C3FD320026BD34 /* GIPHY Anywhere UI Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5B0E965E21BE1E68000470BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B12D6BD21C3FD320026BD34 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -211,6 +273,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5B12D6BB21C3FD320026BD34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B12D6C221C3FD330026BD34 /* app_tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5BF36EFA21B24A8200E7F982 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -223,6 +293,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5B12D6C521C3FD330026BD34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5BF36EFD21B24A8200E7F982 /* GIPHY Anywhere */;
+			targetProxy = 5B12D6C421C3FD330026BD34 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5B0E966C21BE1E6B000470BF /* Debug */ = {
@@ -260,6 +338,42 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		5B12D6C621C3FD330026BD34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.bacongravy.GIPHY-Anywhere-UI-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_TARGET_NAME = "GIPHY Anywhere";
+			};
+			name = Debug;
+		};
+		5B12D6C721C3FD330026BD34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.bacongravy.GIPHY-Anywhere-UI-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_TARGET_NAME = "GIPHY Anywhere";
 			};
 			name = Release;
 		};
@@ -422,6 +536,15 @@
 			buildConfigurations = (
 				5B0E966C21BE1E6B000470BF /* Debug */,
 				5B0E966D21BE1E6B000470BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B12D6C821C3FD330026BD34 /* Build configuration list for PBXNativeTarget "GIPHY Anywhere UI Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B12D6C621C3FD330026BD34 /* Debug */,
+				5B12D6C721C3FD330026BD34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
