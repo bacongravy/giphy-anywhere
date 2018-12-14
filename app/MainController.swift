@@ -148,9 +148,8 @@ class MainController: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         popUpStatusItem()
     }
     
-    @objc func validateMenuItem(_ sender: AnyObject?) -> Bool {
-        let menuItem = sender as? NSMenuItem
-        switch menuItem?.action {
+    @objc func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        switch menuItem.action {
         case #selector(MainController.copyURL(_:)),
              #selector(MainController.copyMarkdown(_:)):
             return gifIdentifier(url: webView.url) != nil
