@@ -1,0 +1,12 @@
+os: osx
+osx_image: xcode10.1
+language: swift
+before_script: scripts/setup_keychain.sh
+script: set -o pipefail && scripts/build.sh | xcpretty
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: build/GIPHY_Anywhere.dmg
+  skip_cleanup: true
+  on:
+    tags: true
