@@ -10,11 +10,13 @@ Sometimes you're composing a chat message or commenting on a pull request, and t
 
 ## Installation
 
-*GIPHY Anywhere* requires macOS.
+*GIPHY Anywhere* requires macOS, and is installed using [Homebrew](https://brew.sh):
 
-The GIPHY icon will appear in your menu bar upon completion of installation.
+```bash
+brew cask install bacongravy/tap/giphy-anywhere
+```
 
-*GIPHY Anywhere* automatically adds itself to your Login Items upon launch, and removes itself from your Login Items if you use the Quit menu item.
+Open *GIPHY Anywhere* and the GIPHY icon will appear in the system menu bar. It will remain there across logouts and restarts until the status bar item is quit.
 
 ## Usage
 
