@@ -13,6 +13,7 @@
 		5B12D6B821C216330026BD34 /* ServiceManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B721C216330026BD34 /* ServiceManagement.swift */; };
 		5B12D6BA21C216750026BD34 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6B921C216750026BD34 /* String.swift */; };
 		5B12D6C221C3FD330026BD34 /* app_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12D6C121C3FD330026BD34 /* app_tests.swift */; };
+		5B967B7621C5D6F300334445 /* giphy.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5B967B7521C5D6F200334445 /* giphy.icns */; };
 		5BF36F1021B24B2200E7F982 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF36F0F21B24B2200E7F982 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		5B12D6BF21C3FD320026BD34 /* GIPHY Anywhere UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GIPHY Anywhere UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B12D6C121C3FD330026BD34 /* app_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = app_tests.swift; sourceTree = "<group>"; };
 		5B12D6C321C3FD330026BD34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B967B7521C5D6F200334445 /* giphy.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = giphy.icns; sourceTree = "<group>"; };
 		5BD007FF21BE2392007A7B2E /* GIPHY Anywhere.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GIPHY Anywhere.entitlements"; sourceTree = "<group>"; };
 		5BF36EFE21B24A8200E7F982 /* GIPHY Anywhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIPHY Anywhere.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF36F0821B24A8400E7F982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				5BF36F0F21B24B2200E7F982 /* main.swift */,
 				5BF36F0821B24A8400E7F982 /* Info.plist */,
 				5BD007FF21BE2392007A7B2E /* GIPHY Anywhere.entitlements */,
+				5B967B7521C5D6F200334445 /* giphy.icns */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -201,6 +204,9 @@
 					5B0E965F21BE1E68000470BF = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
@@ -213,6 +219,9 @@
 					5BF36EFD21B24A8200E7F982 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
@@ -259,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B967B7621C5D6F300334445 /* giphy.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +342,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/helper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -524,6 +535,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
