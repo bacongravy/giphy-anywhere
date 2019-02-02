@@ -24,5 +24,7 @@
     <string>1</string>
 	<key>LSBackgroundOnly</key>
 	<true/>
+    <key>NSHighResolutionCapable</key>
+    <true/>
 </dict>
 </plist>
