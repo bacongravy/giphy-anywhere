@@ -13,7 +13,7 @@ let GIPHY_GIF_URL_SUFFIX = "/giphy.gif"
 let MARKDOWN_PREFIX = "![]("
 let MARKDOWN_SUFFIX = ")"
 
-let IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
+let IPHONE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Mobile/15E148 Safari/604.1"
 
 let STATUS_ITEM_TITLE = "GIPHY Anywhere"
 let COPY_URL_MENU_ITEM_TITLE = "Copy GIF URL"
