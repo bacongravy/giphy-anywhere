@@ -11,3 +11,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+after_deploy: scripts/update_cask.sh
