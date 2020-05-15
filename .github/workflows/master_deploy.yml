@@ -13,19 +13,34 @@ jobs:
     steps:
       - name: "Checkout project"
         uses: actions/checkout@v2
+      - name: "Setup keychain"
+        run: |
+          ./scripts/setup_keychain.sh
+        env:
+          SIGNING_CERTIFICATE_P12_DATA: ${{ secrets.SIGNING_CERTIFICATE_P12_DATA }}
+          SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
       - name: "Build project"
         run: |
-          xcodebuild -project "$PROJECT_NAME" -scheme "$SCHEME_NAME" install DSTROOT=build/root | xcpretty
+          xcodebuild -project "$PROJECT_NAME" -scheme "$SCHEME_NAME" install DSTROOT=build/root DEVELOPMENT_TEAM="$SIGNING_DEVELOPMENT_TEAM" CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" | xcpretty
         env:
           PROJECT_NAME: giphy-anywhere.xcodeproj
           SCHEME_NAME: "GIPHY Anywhere"
+          SIGNING_DEVELOPMENT_TEAM: ${{ secrets.SIGNING_DEVELOPMENT_TEAM }}
+          SIGNING_IDENTITY: ${{ secrets.SIGNING_IDENTITY }}
       - name: "Package app"
+        if: startsWith(github.ref, 'refs/tags/v')
         run: |
           hdiutil create -fs HFS+ -srcfolder build/root/Applications/"$APP_NAME" -volname "$VOLUME_NAME" build/"$DISK_IMAGE_NAME"
         env:
           APP_NAME: "GIPHY Anywhere.app"
           VOLUME_NAME: "GIPHY Anywhere"
           DISK_IMAGE_NAME: "GIPHY_Anywhere.dmg"
+      - name: "Notarize app"
+        run: |
+          ./scripts/notarize.sh
+        env:
+          NOTARIZATION_USERNAME: ${{ secrets.NOTARIZATION_USERNAME }}
+          NOTARIZATION_PASSWORD: ${{ secrets.NOTARIZATION_PASSWORD }}
       - name: "Release app"
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
