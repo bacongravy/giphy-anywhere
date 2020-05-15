@@ -36,6 +36,7 @@ jobs:
           VOLUME_NAME: "GIPHY Anywhere"
           DISK_IMAGE_NAME: "GIPHY_Anywhere.dmg"
       - name: "Notarize app"
+        if: startsWith(github.ref, 'refs/tags/v')
         run: |
           ./scripts/notarize.sh
         env:
