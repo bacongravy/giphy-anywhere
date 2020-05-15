@@ -1,0 +1,27 @@
+name: "build"
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: "Xcode Build"
+    runs-on: "macos-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Build project"
+        env:
+          PROJECT_NAME: giphy-anywhere.xcodeproj
+          SCHEME_NAME: "GIPHY Anywhere"
+        run: |
+          xcodebuild -project "$PROJECT_NAME" -scheme "$SCHEME_NAME" install DSTROOT=build/root | xcpretty
+      - name: "Package app"
+        env:
+          APP_NAME: "GIPHY Anywhere.app"
+          VOLUME_NAME: "GIPHY Anywhere"
+          DISK_IMAGE_NAME: "GIPHY_Anywhere.dmg"
+        run: |
+          hdiutil create -fs HFS+ -srcfolder build/root/Applications/"$APP_NAME" -volname "$VOLUME_NAME" build/"$DISK_IMAGE_NAME"
+      
