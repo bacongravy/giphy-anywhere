@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v2
       - name: "Set environment variables from project settings"
         run: |
-          function set-env-from-proj { echo "::set-env name=$1::$(xcodebuild -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")" }
+          function set-env-from-proj { 
+            echo "::set-env name=$1::$(xcodebuild -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")"
+          }
           set-env-from-proj FULL_PRODUCT_NAME
           set-env-from-proj INSTALL_PATH
           set-env-from-proj PRODUCT_MODULE_NAME
