@@ -9,14 +9,16 @@ jobs:
   build:
     name: "Xcode Build"
     runs-on: "macos-latest"
-
+    env:
+      PROJECT: "giphy-anywhere.xcodeproj"
+      SCHEME: "GIPHY Anywhere"
     steps:
       - name: "Checkout project"
         uses: actions/checkout@v2
       - name: "Set environment variables from project settings"
         run: |
           function set-env-from-proj { 
-            echo "::set-env name=$1::$(xcodebuild -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")"
+            echo "::set-env name=$1::$(xcodebuild -project "$PROJECT" -scheme "$SCHEME" -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")"
           }
           set-env-from-proj FULL_PRODUCT_NAME
           set-env-from-proj INSTALL_PATH
@@ -31,9 +33,7 @@ jobs:
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
       - name: "Build project"
         run: |
-          xcodebuild -project "$PROJECT_NAME" -scheme "$SCHEME_NAME" install DSTROOT=build/root | xcpretty
-        env:
-          SCHEME_NAME: "GIPHY Anywhere"
+          xcodebuild -project "$PROJECT" -scheme "$SCHEME" install DSTROOT=build/root | xcpretty
       - name: "Package app"
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
