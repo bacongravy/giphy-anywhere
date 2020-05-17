@@ -1,17 +1,17 @@
-name: "build"
+name: "master_deploy"
 
 on:
   push:
     branches: [ master ]
     tags: [ v* ]
 
+env:
+  PROJECT: "giphy-anywhere.xcodeproj"
+  SCHEME: "GIPHY Anywhere"
+
 jobs:
-  build:
-    name: "Xcode Build"
+  master_deploy:
     runs-on: "macos-latest"
-    env:
-      PROJECT: "giphy-anywhere.xcodeproj"
-      SCHEME: "GIPHY Anywhere"
     steps:
       - name: "Checkout project"
         uses: actions/checkout@v2
