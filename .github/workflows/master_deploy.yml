@@ -20,6 +20,7 @@ jobs:
           set-env-from-proj INSTALL_PATH
           set-env-from-proj PRODUCT_MODULE_NAME
           set-env-from-proj PRODUCT_NAME
+          echo "Done"
       - name: "Setup keychain"
         run: |
           ./scripts/setup_keychain.sh
