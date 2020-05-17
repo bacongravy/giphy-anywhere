@@ -13,6 +13,13 @@ jobs:
     steps:
       - name: "Checkout project"
         uses: actions/checkout@v2
+      - name: "Set environment variables from project settings"
+        run: |
+          function set-env-from-proj { echo "::set-env name=$1::$(xcodebuild -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")" }
+          set-env-from-proj FULL_PRODUCT_NAME
+          set-env-from-proj INSTALL_PATH
+          set-env-from-proj PRODUCT_MODULE_NAME
+          set-env-from-proj PRODUCT_NAME
       - name: "Setup keychain"
         run: |
           ./scripts/setup_keychain.sh
@@ -21,20 +28,11 @@ jobs:
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
       - name: "Build project"
         run: |
-          xcodebuild -project "$PROJECT_NAME" -scheme "$SCHEME_NAME" install DSTROOT=build/root DEVELOPMENT_TEAM="$DEVELOPMENT_TEAM" CODE_SIGN_IDENTITY="$CODE_SIGN_IDENTITY" | xcpretty
-        env:
-          PROJECT_NAME: giphy-anywhere.xcodeproj
-          SCHEME_NAME: "GIPHY Anywhere"
-          DEVELOPMENT_TEAM: "WPEJJ9FF9Y"
-          CODE_SIGN_IDENTITY: "Developer ID Application: David Kramer (WPEJJ9FF9Y)"
+          xcodebuild install DSTROOT=build/root | xcpretty
       - name: "Package app"
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          hdiutil create -fs HFS+ -srcfolder build/root/Applications/"$APP_NAME" -volname "$VOLUME_NAME" build/"$DISK_IMAGE_NAME"
-        env:
-          APP_NAME: "GIPHY Anywhere.app"
-          VOLUME_NAME: "GIPHY Anywhere"
-          DISK_IMAGE_NAME: "GIPHY_Anywhere.dmg"
+          hdiutil create -fs HFS+ -srcfolder "build/root/$INSTALL_PATH/$FULL_PRODUCT_NAME" -volname "$PRODUCT_NAME" "build/$PRODUCT_MODULE_NAME.dmg"
       - name: "Notarize app"
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
@@ -46,7 +44,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
         with:
-          files: build/GIPHY_Anywhere.dmg
+          files: build/${{ env.PRODUCT_MODULE_NAME }}.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
