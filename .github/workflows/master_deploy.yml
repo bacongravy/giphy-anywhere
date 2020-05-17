@@ -22,7 +22,7 @@ jobs:
           set-env-from-proj INSTALL_PATH
           set-env-from-proj PRODUCT_MODULE_NAME
           set-env-from-proj PRODUCT_NAME
-          echo "Done"
+          set-env-from-proj PROJECT_NAME
       - name: "Setup keychain"
         run: |
           ./scripts/setup_keychain.sh
@@ -31,7 +31,9 @@ jobs:
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
       - name: "Build project"
         run: |
-          xcodebuild install DSTROOT=build/root | xcpretty
+          xcodebuild -project "$PROJECT_NAME" -scheme "$SCHEME_NAME" install DSTROOT=build/root | xcpretty
+        env:
+          SCHEME_NAME: "GIPHY Anywhere"
       - name: "Package app"
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
