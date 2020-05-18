@@ -78,24 +78,28 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update cask
+      - name: Checkout Homebrew tap
+        uses: actions/checkout@v2
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          repository: ${{ secrets.CASK_REPO }}
+          token: ${{ secrets.CASK_REPO_TOKEN }}
+          path: homebrew-tap
+
+      - name: Update cask in Homebrew tap
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          curl \
-            -X POST \
-            -H "Authorization: token $CASK_REPO_TOKEN" \
-            -H "Accept: application/vnd.github.everest-preview+json" \
-            -H "Content-Type: application/json" \
-            --data '{
-              "event_type": "update_cask",
-              "client_payload": {
-                "name": "'"${PROJECT_NAME}"'",
-                "version": "'$(echo "$GITHUB_REF" | cut -c12-)'",
-                "sha256": "'$(shasum --algorithm 256 "build/$PRODUCT_MODULE_NAME.dmg" | awk '{print $1}')'"
-              }
-            }' \
-            https://api.github.com/repos/${CASK_REPO}/dispatches
+          CASK_NAME=$PROJECT_NAME
+          CASK_VERSION=$(echo "$GITHUB_REF" | cut -c12-)
+          CASK_SHA256=$(shasum --algorithm 256 "build/$PRODUCT_MODULE_NAME.dmg" | awk '{print $1}')
+          cd homebrew-tap
+          git config --local user.name "${USER_NAME}"
+          git config --local user.email "${USER_NAME}@users.noreply.github.com"
+          sed -i "s/\( *version *'\)\([^']*\)'/\1${CASK_VERSION}'/" Casks/${CASK_NAME}.rb
+          sed -i "s/\( *sha256 *'\)\([^']*\)'/\1${CASK_SHA256}'/" Casks/${CASK_NAME}.rb
+          git add Casks/${CASK_NAME}.rb
+          git commit -m "update ${CASK_NAME} to v${CASK_VERSION}"
+          git push origin
         env:
           GITHUB_REF: ${{ github.ref }}
-          CASK_REPO: ${{ secrets.CASK_REPO }}
-          CASK_REPO_TOKEN: ${{ secrets.CASK_REPO_TOKEN }}
+          USER_NAME: ${{ github.event.sender.login }}
