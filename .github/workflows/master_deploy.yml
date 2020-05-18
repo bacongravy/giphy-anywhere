@@ -47,7 +47,10 @@ jobs:
       - name: "Package app"
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          hdiutil create -fs HFS+ -srcfolder "build/root/$INSTALL_PATH/$FULL_PRODUCT_NAME" -volname "$PRODUCT_NAME" "build/$PRODUCT_MODULE_NAME.dmg"
+          hdiutil create \
+                  -fs HFS+ \
+                  -srcfolder "build/root/$INSTALL_PATH/$FULL_PRODUCT_NAME" \
+                  -volname "$PRODUCT_NAME" "build/$PRODUCT_MODULE_NAME.dmg"
       - name: "Notarize app"
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
