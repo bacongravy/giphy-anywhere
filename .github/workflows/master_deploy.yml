@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
+
       - name: Set environment variables from project settings
         run: |
           function set-env-from-proj { 
@@ -27,6 +28,7 @@ jobs:
           set-env-from-proj PRODUCT_MODULE_NAME
           set-env-from-proj PRODUCT_NAME
           set-env-from-proj PROJECT_NAME
+
       - name: Import signing certificate into keychain
         run: |
           KEYCHAIN_FILE=default.keychain
@@ -43,12 +45,15 @@ jobs:
         env:
           SIGNING_CERTIFICATE_P12_DATA: ${{ secrets.SIGNING_CERTIFICATE_P12_DATA }}
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
+
       - name: Build and test app
         run: |
           xcodebuild -project "$PROJECT" -scheme "$SCHEME" test | xcpretty
+
       - name: Build and install app
         run: |
           xcodebuild -project "$PROJECT" -scheme "$SCHEME" install DSTROOT=build/root | xcpretty
+
       - name: Package app
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
@@ -56,6 +61,7 @@ jobs:
                   -fs HFS+ \
                   -srcfolder "build/root/$INSTALL_PATH/$FULL_PRODUCT_NAME" \
                   -volname "$PRODUCT_NAME" "build/$PRODUCT_MODULE_NAME.dmg"
+
       - name: Notarize app
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
@@ -63,6 +69,7 @@ jobs:
         env:
           NOTARIZE_USERNAME: ${{ secrets.NOTARIZE_USERNAME }}
           NOTARIZE_PASSWORD: ${{ secrets.NOTARIZE_PASSWORD }}
+
       - name: Release app
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
@@ -70,6 +77,7 @@ jobs:
           files: build/${{ env.PRODUCT_MODULE_NAME }}.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Update cask
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
