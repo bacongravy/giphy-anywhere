@@ -22,6 +22,7 @@ jobs:
           }
           set-env-from-proj FULL_PRODUCT_NAME
           set-env-from-proj INSTALL_PATH
+          set-env-from-proj PRODUCT_BUNDLE_IDENTIFIER
           set-env-from-proj PRODUCT_MODULE_NAME
           set-env-from-proj PRODUCT_NAME
           set-env-from-proj PROJECT_NAME
@@ -54,10 +55,10 @@ jobs:
       - name: "Notarize app"
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          ./scripts/notarize.sh
+          npx notarize-cli --file "build/$PRODUCT_MODULE_NAME.dmg"
         env:
-          NOTARIZATION_USERNAME: ${{ secrets.NOTARIZATION_USERNAME }}
-          NOTARIZATION_PASSWORD: ${{ secrets.NOTARIZATION_PASSWORD }}
+          NOTARIZE_USERNAME: ${{ secrets.NOTARIZE_USERNAME }}
+          NOTARIZE_PASSWORD: ${{ secrets.NOTARIZE_PASSWORD }}
       - name: "Release app"
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
