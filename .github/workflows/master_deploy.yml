@@ -42,7 +42,10 @@ jobs:
         env:
           SIGNING_CERTIFICATE_P12_DATA: ${{ secrets.SIGNING_CERTIFICATE_P12_DATA }}
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
-      - name: "Build project"
+      - name: "Build and test app"
+        run: |
+          xcodebuild -project "$PROJECT" -scheme "$SCHEME" test DSTROOT=build/root | xcpretty
+      - name: "Build and install app"
         run: |
           xcodebuild -project "$PROJECT" -scheme "$SCHEME" install DSTROOT=build/root | xcpretty
       - name: "Package app"
