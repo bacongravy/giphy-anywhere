@@ -66,5 +66,24 @@ jobs:
           files: build/${{ env.PRODUCT_MODULE_NAME }}.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
+      - name: "Update cask"
+        run: |
+          curl \
+            -X POST \
+            -u "$CASK_REPO_USERNAME:$CASK_REPO_TOKEN" \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Content-Type: application/json" \
+            --data '{
+              "event_type": "update_cask",
+              "client_payload": {
+                "name": "'"${PROJECT_NAME}"'",
+                "version": "'$(echo "$GITHUB_REF" | cut -c12-)'",
+                "sha256": "'$(shasum --algorithm 256 "build/$PRODUCT_MODULE_NAME.dmg" | awk '{print $1}')'"
+              }
+            }' \
+            https://api.github.com/repos/${CASK_REPO}/dispatches
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          CASK_REPO: bacongravy/homebrew-tap
+          CASK_REPO_USERNAME: ${{ secrets.CASK_REPO_USERNAME }}
+          CASK_REPO_TOKEN: ${{ secrets.CASK_REPO_TOKEN }}
