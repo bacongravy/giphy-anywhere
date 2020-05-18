@@ -26,7 +26,7 @@ jobs:
           set-env-from-proj PRODUCT_MODULE_NAME
           set-env-from-proj PRODUCT_NAME
           set-env-from-proj PROJECT_NAME
-      - name: "Setup keychain"
+      - name: "Import signing certificate into keychain"
         run: |
           KEYCHAIN_FILE=default.keychain
           KEYCHAIN_PASSWORD=myvoiceismypassport
