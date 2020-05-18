@@ -5,10 +5,6 @@ on:
     branches: [ master ]
     tags: [ v* ]
 
-env:
-  PROJECT: giphy-anywhere.xcodeproj
-  SCHEME: GIPHY Anywhere
-
 jobs:
   master_deploy:
     runs-on: macos-latest
@@ -17,10 +13,14 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v2
 
+      - name: Find first scheme of default project
+        run: |
+          echo "::set-env name=SCHEME::$(xcodebuild -list -json | jq -r '.project.schemes[0]')"
+
       - name: Set environment variables from project settings
         run: |
           function set-env-from-proj { 
-            echo "::set-env name=$1::$(xcodebuild -project "$PROJECT" -scheme "$SCHEME" -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")"
+            echo "::set-env name=$1::$(xcodebuild -scheme "$SCHEME" -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")"
           }
           set-env-from-proj FULL_PRODUCT_NAME
           set-env-from-proj INSTALL_PATH
@@ -48,11 +48,11 @@ jobs:
 
       - name: Build and test app
         run: |
-          xcodebuild -project "$PROJECT" -scheme "$SCHEME" test | xcpretty
+          xcodebuild -scheme "$SCHEME" test | xcpretty
 
       - name: Build and install app
         run: |
-          xcodebuild -project "$PROJECT" -scheme "$SCHEME" install DSTROOT=build/root | xcpretty
+          xcodebuild -scheme "$SCHEME" install DSTROOT=build/root | xcpretty
 
       - name: Package app
         if: startsWith(github.ref, 'refs/tags/v')
