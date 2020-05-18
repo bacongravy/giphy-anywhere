@@ -83,7 +83,7 @@ jobs:
         run: |
           curl \
             -X POST \
-            -u "$CASK_REPO_USERNAME:$CASK_REPO_TOKEN" \
+            -H "Authorization: token $CASK_REPO_TOKEN"
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Content-Type: application/json" \
             --data '{
@@ -97,6 +97,5 @@ jobs:
             https://api.github.com/repos/${CASK_REPO}/dispatches
         env:
           GITHUB_REF: ${{ github.ref }}
-          CASK_REPO: bacongravy/homebrew-tap
-          CASK_REPO_USERNAME: ${{ secrets.CASK_REPO_USERNAME }}
+          CASK_REPO: ${{ secrets.CASK_REPO }}
           CASK_REPO_TOKEN: ${{ secrets.CASK_REPO_TOKEN }}
