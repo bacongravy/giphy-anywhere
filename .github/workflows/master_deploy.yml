@@ -44,7 +44,7 @@ jobs:
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
       - name: "Build and test app"
         run: |
-          xcodebuild -project "$PROJECT" -scheme "$SCHEME" test DSTROOT=build/root | xcpretty
+          xcodebuild -project "$PROJECT" -scheme "$SCHEME" test | xcpretty
       - name: "Build and install app"
         run: |
           xcodebuild -project "$PROJECT" -scheme "$SCHEME" install DSTROOT=build/root | xcpretty
