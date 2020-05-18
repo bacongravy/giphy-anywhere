@@ -95,8 +95,8 @@ jobs:
           cd homebrew-tap
           git config --local user.name "${USER_NAME}"
           git config --local user.email "${USER_NAME}@users.noreply.github.com"
-          sed -i "s/\( *version *'\)\([^']*\)'/\1${CASK_VERSION}'/" Casks/${CASK_NAME}.rb
-          sed -i "s/\( *sha256 *'\)\([^']*\)'/\1${CASK_SHA256}'/" Casks/${CASK_NAME}.rb
+          sed -i '' "s/\( *version *'\)\([^']*\)'/\1${CASK_VERSION}'/" Casks/${CASK_NAME}.rb
+          sed -i '' "s/\( *sha256 *'\)\([^']*\)'/\1${CASK_SHA256}'/" Casks/${CASK_NAME}.rb
           git add Casks/${CASK_NAME}.rb
           git commit -m "update ${CASK_NAME} to v${CASK_VERSION}"
           git push origin
