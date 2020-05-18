@@ -83,7 +83,7 @@ jobs:
         run: |
           curl \
             -X POST \
-            -H "Authorization: token $CASK_REPO_TOKEN"
+            -H "Authorization: token $CASK_REPO_TOKEN" \
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Content-Type: application/json" \
             --data '{
